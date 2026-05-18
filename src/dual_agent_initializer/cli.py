@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import argparse
-import os
 import shutil
 import stat
 import subprocess
@@ -48,7 +47,7 @@ GIT_HOOK_TARGET = ".git/hooks/pre-commit"
 
 
 def run(cmd: list[str], cwd: Path, check: bool = False) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(cmd, cwd=str(cwd), text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=check)
+    return subprocess.run(cmd, cwd=str(cwd), text=True, capture_output=True, check=check)
 
 
 def git_available() -> bool:

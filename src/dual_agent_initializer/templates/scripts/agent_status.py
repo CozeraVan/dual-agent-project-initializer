@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 def run(cmd: list[str]) -> str:
-    return subprocess.run(cmd, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout
+    return subprocess.run(cmd, text=True, capture_output=True).stdout
 
 
 print("== Agent State ==")

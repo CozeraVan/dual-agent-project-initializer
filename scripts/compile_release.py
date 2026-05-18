@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-import ast
 from pathlib import Path
 from pprint import pformat
 
@@ -49,7 +48,7 @@ CORE_DOCS = [
 
 
 def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(cmd, cwd=str(cwd), text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return subprocess.run(cmd, cwd=str(cwd), text=True, capture_output=True)
 
 
 def git_available() -> bool:

@@ -2582,8 +2582,8 @@ TEMPLATES = {'.agents/skills/claude-implement/SKILL.md': '---\n'
                             '\n'
                             '\n'
                             'def run(cmd: list[str]) -> str:\n'
-                            '    return subprocess.run(cmd, text=True, stdout=subprocess.PIPE, '
-                            'stderr=subprocess.PIPE).stdout\n'
+                            '    return subprocess.run(cmd, text=True, '
+                            'capture_output=True).stdout\n'
                             '\n'
                             '\n'
                             'print("== Agent State ==")\n'
@@ -2623,7 +2623,6 @@ TEMPLATES = {'.agents/skills/claude-implement/SKILL.md': '---\n'
                                    'from __future__ import annotations\n'
                                    '\n'
                                    'import re\n'
-                                   'import re\n'
                                    'import subprocess\n'
                                    'import sys\n'
                                    'from pathlib import Path\n'
@@ -2655,8 +2654,8 @@ TEMPLATES = {'.agents/skills/claude-implement/SKILL.md': '---\n'
                                    '\n'
                                    'def run(cmd: list[str], check: bool = False) -> '
                                    'subprocess.CompletedProcess[str]:\n'
-                                   '    return subprocess.run(cmd, text=True, '
-                                   'stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=check)\n'
+                                   '    return subprocess.run(cmd, text=True, capture_output=True, '
+                                   'check=check)\n'
                                    '\n'
                                    '\n'
                                    'def inside_git() -> bool:\n'
@@ -2780,8 +2779,7 @@ TEMPLATES = {'.agents/skills/claude-implement/SKILL.md': '---\n'
                                   '\n'
                                   '\n'
                                   'def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:\n'
-                                  '    return subprocess.run(cmd, text=True, '
-                                  'stdout=subprocess.PIPE, stderr=subprocess.PIPE)\n'
+                                  '    return subprocess.run(cmd, text=True, capture_output=True)\n'
                                   '\n'
                                   '\n'
                                   'def main() -> int:\n'
@@ -2859,7 +2857,7 @@ CORE_DOCS = [
 
 
 def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(cmd, cwd=str(cwd), text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return subprocess.run(cmd, cwd=str(cwd), text=True, capture_output=True)
 
 
 def git_available() -> bool:

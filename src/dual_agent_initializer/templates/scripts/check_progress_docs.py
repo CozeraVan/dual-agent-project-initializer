@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import re
-import re
 import subprocess
 import sys
 from pathlib import Path
@@ -27,7 +26,7 @@ PROTECTED_WORKFLOW_PATTERNS = re.compile(
 
 
 def run(cmd: list[str], check: bool = False) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(cmd, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=check)
+    return subprocess.run(cmd, text=True, capture_output=True, check=check)
 
 
 def inside_git() -> bool:

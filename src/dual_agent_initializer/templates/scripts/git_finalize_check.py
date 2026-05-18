@@ -9,7 +9,7 @@ SECRET_RE = re.compile(r"api[_-]?key|secret|token|password|passwd|BEGIN (RSA|OPE
 
 
 def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(cmd, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return subprocess.run(cmd, text=True, capture_output=True)
 
 
 def main() -> int:

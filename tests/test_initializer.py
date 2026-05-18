@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import os
 import subprocess
 import sys
 from pathlib import Path
@@ -29,7 +28,7 @@ CORE_DOCS = [
 
 
 def run(cmd: list[str], cwd: Path | None = None) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(cmd, cwd=cwd, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return subprocess.run(cmd, cwd=cwd, text=True, capture_output=True)
 
 
 def test_initializes_core_files(tmp_path: Path) -> None:
