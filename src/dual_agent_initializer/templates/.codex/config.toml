@@ -1,0 +1,10 @@
+# Project-level Codex config.
+# Keep this conservative by default.
+# For one-off maximum-permission runs in an isolated VM, start Codex manually with:
+#   codex --dangerously-bypass-approvals-and-sandbox
+
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+
+[sandbox_workspace_write]
+network_access = true

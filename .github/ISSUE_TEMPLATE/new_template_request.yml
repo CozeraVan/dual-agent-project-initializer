@@ -1,0 +1,21 @@
+name: New Template Request
+description: Request a project-type template or workflow variant.
+title: "[Template]: "
+labels: [template]
+body:
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use case
+      description: What type of project should this support?
+    validations:
+      required: true
+  - type: textarea
+    id: stack
+    attributes:
+      label: Tech stack
+      placeholder: "FastAPI + PostgreSQL, React Native, Rust CLI, quant research, etc."
+  - type: textarea
+    id: files
+    attributes:
+      label: Desired generated files or rules

@@ -1,0 +1,20 @@
+name: Workflow Discussion
+description: Discuss Codex / Claude Code collaboration boundaries and process improvements.
+title: "[Workflow]: "
+labels: [workflow, discussion]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Describe the workflow problem or improvement idea.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks or tradeoffs
