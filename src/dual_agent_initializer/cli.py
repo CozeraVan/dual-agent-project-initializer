@@ -46,6 +46,12 @@ GIT_HOOK_TEMPLATE = "_git/hooks/pre-commit"
 GIT_HOOK_TARGET = ".git/hooks/pre-commit"
 
 
+def configure_stdio() -> None:
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
+
+
 def run(cmd: list[str], cwd: Path, check: bool = False) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=str(cwd), text=True, capture_output=True, check=check)
 
@@ -198,6 +204,8 @@ def initialize(project: Path, no_git_commit: bool = False, overwrite_readme: boo
 
 
 def main(argv: list[str] | None = None) -> int:
+    configure_stdio()
+
     parser = argparse.ArgumentParser(description="Initialize a reusable dual-agent project workflow.")
     parser.add_argument("project_dir", nargs="?", default=".", help="Project directory. Defaults to current directory.")
     parser.add_argument("--no-git-commit", action="store_true", help="Initialize files and git hook, but do not create initial commit.")
