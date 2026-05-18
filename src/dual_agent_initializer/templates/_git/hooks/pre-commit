@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+if [ -f scripts/check_progress_docs.py ]; then
+  python3 scripts/check_progress_docs.py 2>/dev/null || python scripts/check_progress_docs.py
+fi

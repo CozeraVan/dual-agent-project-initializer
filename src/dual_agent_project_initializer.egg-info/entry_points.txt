@@ -1,2 +1,0 @@
-[console_scripts]
-init-agent-project = dual_agent_initializer.cli:main

@@ -740,17 +740,47 @@ TEMPLATES = {'.agents/skills/claude-implement/SKILL.md': '---\n'
                        '\n'
                        '[sandbox_workspace_write]\n'
                        'network_access = true\n',
- '.git/hooks/pre-commit': '#!/usr/bin/env sh\n'
-                          'if [ -f scripts/check_progress_docs.py ]; then\n'
-                          '  python3 scripts/check_progress_docs.py 2>/dev/null || python '
-                          'scripts/check_progress_docs.py\n'
-                          'fi\n',
+ '.editorconfig': 'root = true\n'
+                  '\n'
+                  '[*]\n'
+                  'charset = utf-8\n'
+                  'end_of_line = lf\n'
+                  'insert_final_newline = true\n'
+                  'trim_trailing_whitespace = true\n'
+                  '\n'
+                  '[*.md]\n'
+                  'trim_trailing_whitespace = false\n',
+ '.gitattributes': '* text=auto eol=lf\n'
+                   '\n'
+                   '*.md text eol=lf\n'
+                   '*.py text eol=lf\n'
+                   '*.toml text eol=lf\n'
+                   '*.yml text eol=lf\n'
+                   '*.yaml text eol=lf\n'
+                   '*.json text eol=lf\n'
+                   '*.sh text eol=lf\n'
+                   '*.ps1 text eol=lf\n'
+                   '*.txt text eol=lf\n'
+                   '*.in text eol=lf\n'
+                   'Makefile text eol=lf\n'
+                   'LICENSE text eol=lf\n'
+                   '\n'
+                   '*.png binary\n'
+                   '*.jpg binary\n'
+                   '*.jpeg binary\n'
+                   '*.gif binary\n'
+                   '*.webp binary\n'
+                   '*.ico binary\n'
+                   '*.pdf binary\n'
+                   '*.zip binary\n',
  '.gitignore': '.agent-backups/\n'
                '.env\n'
                '.env.*\n'
                'node_modules/\n'
                '__pycache__/\n'
                '.pytest_cache/\n'
+               '.ruff_cache/\n'
+               '*.egg-info/\n'
                '.DS_Store\n',
  'AGENTS.md': '# Codex Project Instructions\n'
               '\n'
@@ -1077,6 +1107,11 @@ TEMPLATES = {'.agents/skills/claude-implement/SKILL.md': '---\n'
               '- New idea: `请读取 11 和 12，把以下新 idea 作为 Change Request 分析，不改代码。`\n'
               '- Architecture change: `请进入 Architecture Change Mode，读取 '
               '11、12、13，对以下架构变更做影响分析，不改业务代码。`\n',
+ '_git/hooks/pre-commit': '#!/usr/bin/env sh\n'
+                          'if [ -f scripts/check_progress_docs.py ]; then\n'
+                          '  python3 scripts/check_progress_docs.py 2>/dev/null || python '
+                          'scripts/check_progress_docs.py\n'
+                          'fi\n',
  'docs/agent/00_PRODUCT_VISION.md': '# Product Vision\n'
                                     '\n'
                                     'Project name: {{PROJECT_NAME}}\n'
@@ -2807,10 +2842,12 @@ EXECUTABLE_PATHS = {
     "scripts/git-finalize-check.sh",
     "scripts/agent-status.sh",
     ".claude/hooks/progress-gate.sh",
+    "_git/hooks/pre-commit",
     ".git/hooks/pre-commit",
 }
 
-GIT_HOOK_TEMPLATE = ".git/hooks/pre-commit"
+GIT_HOOK_TEMPLATE = "_git/hooks/pre-commit"
+GIT_HOOK_TARGET = ".git/hooks/pre-commit"
 
 CORE_DOCS = [
     "CLAUDE.md", "AGENTS.md", "docs/agent/00_PRODUCT_VISION.md", "docs/agent/01_CURRENT_STATUS.md",
@@ -2875,8 +2912,8 @@ def ensure_git(project: Path, backup_root: Path, hook_content: str | None, no_co
                 print(cp.stderr.strip())
             return
     if hook_content is not None:
-        write_file(project, GIT_HOOK_TEMPLATE, hook_content, backup_root, overwrite_readme=True)
-    add_targets = ["CLAUDE.md", "AGENTS.md", "README.md", ".gitignore", "docs/agent", ".claude", ".agents", ".codex", "scripts"]
+        write_file(project, GIT_HOOK_TARGET, hook_content, backup_root, overwrite_readme=True)
+    add_targets = [".editorconfig", ".gitattributes", ".gitignore", "CLAUDE.md", "AGENTS.md", "README.md", "docs/agent", ".claude", ".agents", ".codex", "scripts"]
     run(["git", "add", *add_targets], project)
     if no_commit:
         return

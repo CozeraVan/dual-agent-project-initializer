@@ -32,10 +32,12 @@ EXECUTABLE_PATHS = {
     "scripts/git-finalize-check.sh",
     "scripts/agent-status.sh",
     ".claude/hooks/progress-gate.sh",
+    "_git/hooks/pre-commit",
     ".git/hooks/pre-commit",
 }
 
-GIT_HOOK_TEMPLATE = ".git/hooks/pre-commit"
+GIT_HOOK_TEMPLATE = "_git/hooks/pre-commit"
+GIT_HOOK_TARGET = ".git/hooks/pre-commit"
 
 CORE_DOCS = [
     "CLAUDE.md", "AGENTS.md", "docs/agent/00_PRODUCT_VISION.md", "docs/agent/01_CURRENT_STATUS.md",
@@ -100,8 +102,8 @@ def ensure_git(project: Path, backup_root: Path, hook_content: str | None, no_co
                 print(cp.stderr.strip())
             return
     if hook_content is not None:
-        write_file(project, GIT_HOOK_TEMPLATE, hook_content, backup_root, overwrite_readme=True)
-    add_targets = ["CLAUDE.md", "AGENTS.md", "README.md", ".gitignore", "docs/agent", ".claude", ".agents", ".codex", "scripts"]
+        write_file(project, GIT_HOOK_TARGET, hook_content, backup_root, overwrite_readme=True)
+    add_targets = [".editorconfig", ".gitattributes", ".gitignore", "CLAUDE.md", "AGENTS.md", "README.md", "docs/agent", ".claude", ".agents", ".codex", "scripts"]
     run(["git", "add", *add_targets], project)
     if no_commit:
         return

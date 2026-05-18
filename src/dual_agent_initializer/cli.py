@@ -20,6 +20,7 @@ EXECUTABLE_PATHS = {
     "scripts/git-finalize-check.sh",
     "scripts/agent-status.sh",
     ".claude/hooks/progress-gate.sh",
+    "_git/hooks/pre-commit",
     ".git/hooks/pre-commit",
 }
 
@@ -42,7 +43,8 @@ CORE_DOCS = [
     "docs/agent/13_CHANGE_CONTROL.md",
 ]
 
-GIT_HOOK_TEMPLATE = ".git/hooks/pre-commit"
+GIT_HOOK_TEMPLATE = "_git/hooks/pre-commit"
+GIT_HOOK_TARGET = ".git/hooks/pre-commit"
 
 
 def run(cmd: list[str], cwd: Path, check: bool = False) -> subprocess.CompletedProcess[str]:
@@ -120,14 +122,16 @@ def ensure_git(project: Path, backup_root: Path, hook_content: str | None, no_co
             return
 
     if hook_content is not None:
-        write_file(project, GIT_HOOK_TEMPLATE, hook_content, backup_root, overwrite_readme=True)
+        write_file(project, GIT_HOOK_TARGET, hook_content, backup_root, overwrite_readme=True)
 
     # Git hooks are intentionally not added; .git is not versioned.
     add_targets = [
+        ".editorconfig",
+        ".gitattributes",
+        ".gitignore",
         "CLAUDE.md",
         "AGENTS.md",
         "README.md",
-        ".gitignore",
         "docs/agent",
         ".claude",
         ".agents",

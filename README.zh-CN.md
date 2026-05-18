@@ -2,15 +2,19 @@
 
 [English](README.md) | [架构说明](docs/ARCHITECTURE.md) | [贡献指南](CONTRIBUTING.zh-CN.md)
 
-## 工作流示意图
-
-![三者关系与协作流程](docs/assets/diagram_1_workflow_zh_CN.png)
-
-![生成文件权限与作用](docs/assets/diagram_2_permissions_zh_CN.png)
-
 一个用于初始化 **双 Coding Agents 协作工作流** 的跨平台项目母板。
 
 用户担任 Product Owner / 项目经理，Codex 担任 Planner / Reviewer / Git Finalizer，Claude Code 担任 Implementer / Fixer。初始化器会生成一套可版本化、可恢复、可复现的文件型工作流，用于项目 brainstorm、长期记忆、任务交接、代码实现、代码审查、Git checkpoint 和 Change Request。
+
+## 图示概览
+
+<p align="center">
+  <img src="docs/assets/diagram_1_workflow_zh_CN.png" alt="双 Agent 协作工作流概览" width="820">
+</p>
+
+<p align="center">
+  <img src="docs/assets/diagram_2_permissions_zh_CN.png" alt="双 Agent 权限与职责边界" width="820">
+</p>
 
 ## 为什么需要这个项目
 
